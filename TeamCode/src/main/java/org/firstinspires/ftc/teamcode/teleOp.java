@@ -27,13 +27,10 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.teamcode.Teleop;
+package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-
-import org.firstinspires.ftc.teamcode.Hardware;
-import org.firstinspires.ftc.teamcode.MecanumHardware;
 
 
 
@@ -73,9 +70,7 @@ public class teleOp extends OpMode {
     public void loop()
 
     {
-
         mecanumMove();
-
     }
 
     public void mecanumMove()
