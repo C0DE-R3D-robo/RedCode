@@ -53,7 +53,7 @@ public class teleOp extends OpMode {
 
     mecanumHardware robot = new mecanumHardware();
     // Declare OpMode members.
-    private float drive = .4f;
+    private float drive = 1f;
     //private float BRDrive = 1f;
 
     @Override
