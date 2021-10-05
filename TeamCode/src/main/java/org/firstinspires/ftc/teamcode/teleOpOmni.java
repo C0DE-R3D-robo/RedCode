@@ -33,7 +33,6 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 
-
 /**
  * This file contains an minimal example of a Linear "OpMode". An OpMode is a 'program' that runs in either
  * the autonomous or the teleop period of an FTC match. The names of OpModes appear on the menu
@@ -47,11 +46,11 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@TeleOp(name="teleOp", group="teleop")
+@TeleOp(name="teleOpOmni", group="teleop")
 //@Disabled
-public class teleOp extends OpMode {
+public class teleOpOmni extends OpMode {
 
-    mecanumHardware robot = new mecanumHardware();
+    omni robot = new omni();
     // Declare OpMode members.
     private float drive = 1f;
     //private float BRDrive = 1f;
@@ -63,17 +62,42 @@ public class teleOp extends OpMode {
         //The init() method of the hardware class does all the work here
         robot.init(hardwareMap);
 
-
     }
 
     @Override
     public void loop()
 
     {
-        mecanumMove();
+        if (gamepad1.left_stick_y > 0.4){
+            robot.motor2.setPower(drive);
+            robot.motor3.setPower(drive);
+        }
+        else if (gamepad1.left_stick_y < -0.4){
+            robot.motor2.setPower(-drive);
+            robot.motor3.setPower(-drive);
+        }
+        else
+        {
+            robot.motor2.setPower(0);
+            robot.motor3.setPower(0);
+        }
+
+        if (gamepad1.left_stick_x > 0.4){
+            robot.motor0.setPower(drive);
+            robot.motor1.setPower(drive);
+        }
+        else if (gamepad1.left_stick_x < -0.4){
+            robot.motor0.setPower(-drive);
+            robot.motor1.setPower(-drive);
+        }
+        else {
+            robot.motor0.setPower(0);
+            robot.motor1.setPower(0);
+        }
+      //  mecanumMove();
     }
 
-    public void mecanumMove()
+    /* public void mecanumMove()
     {
         //variableswrw3
         double r = Math.hypot(-gamepad1.left_stick_x, gamepad1.left_stick_y);
@@ -101,5 +125,7 @@ public class teleOp extends OpMode {
 
 
         telemetry.update();
-    }
+
+
+    }*/
 }
