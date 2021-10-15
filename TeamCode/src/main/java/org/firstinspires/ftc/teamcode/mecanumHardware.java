@@ -1,37 +1,23 @@
 package org.firstinspires.ftc.teamcode;
 
-
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
-
+// Hardware class for the Greenhill 3 testbot
 
 public class mecanumHardware
 {
     /* Public OpMode members. */
-    public DcMotor  frontLeft   = null;
-    public DcMotor  frontRight  = null;
-    public DcMotor  backLeft   = null;
-    public DcMotor  backRight  = null;
-    public DcMotor  tetrix     = null;
-    public double servomin = 0;
-    public double servomax = 70;
+    public DcMotor  frontLeft   = null, frontRight  = null, backLeft   = null, backRight  = null;
+    public DcMotor  pulleyMotor = null, carousel = null;
+    public CRServo extenderServo = null;
+    public Servo grabberServo = null;
 
-
-    static final double     COUNTS_PER_MOTOR_REV    = 28 ;    // AndyMark Motor Encoder
-    static final double     DRIVE_GEAR_REDUCTION    = 20.0;     // This is < 1.0 if geared UP
-    static final double     WHEEL_DIAMETER_INCHES   = 2.73;     // For fwiguring circumference
-    static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) / (WHEEL_DIAMETER_INCHES * 3.1415);
-
-    /* local OpMode members. */
-    HardwareMap hwMap           =  null;
-
-    Servo servo1 = null;
-    Servo servo2 = null;
-
-    private ElapsedTime period  = new ElapsedTime();
+    public static final double grabber_min = 0;
+    public static final double grabber_max = 1;
 
     /* Constructor */
     public mecanumHardware(){
@@ -39,42 +25,52 @@ public class mecanumHardware
     }
 
     /* Initialize standard Hardware interfaces */
-    public void init(HardwareMap ahwMap) {
-        // Save reference to Hardware map
-        hwMap = ahwMap;
-
-        // Define and Initialize Motors
+    public void init(HardwareMap hwMap) {
+        // Define and Initialize Devices
         frontLeft  = hwMap.get(DcMotor.class, "front_left");
         frontRight = hwMap.get(DcMotor.class, "front_right");
         backLeft   = hwMap.get(DcMotor.class, "back_left");
         backRight  = hwMap.get(DcMotor.class, "back_right");
-        tetrix  = hwMap.get(DcMotor.class, "tet_pulley");
-        servo1 = hwMap.get(Servo.class,"servo_1");
-        servo2 = hwMap.get(Servo.class,"servo_2");
+
+        pulleyMotor  = hwMap.get(DcMotor.class, "tet_pulley");
+        carousel = hwMap.get(DcMotor.class, "motor_carousel");
+        extenderServo = hwMap.get(CRServo.class,"extender");
+
+        grabberServo = hwMap.get(Servo.class, "grabber");
+
+        // Set Direction
         frontLeft.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         frontRight.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
         backLeft.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         backRight.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
-        tetrix.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
+        pulleyMotor.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
+        carousel.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
+        extenderServo.setDirection(DcMotorSimple.Direction.FORWARD);
+
         // Set all motors to zero power
         frontLeft.setPower(0);
         frontRight.setPower(0);
         backLeft.setPower(0);
         backRight.setPower(0);
-        tetrix.setPower(0);
-        servo1.setPosition(0);
-        servo2.setPosition(20);
+        pulleyMotor.setPower(0);
+        carousel.setPower(0);
+        extenderServo.setPower(0);
 
-        // Set all motors to run without encoders.
+        // Set all motors to run with encoders if applicable.
         // May want to use RUN_USING_ENCODERS if encoders are installed.
         frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        tetrix.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        pulleyMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        carousel.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        //servo range
-        servo2.scaleRange(servomin, servomax);
+
+        // Set servo to min position
+        grabberServo.setPosition(grabber_min);
+
+
+
     }
 }
 
