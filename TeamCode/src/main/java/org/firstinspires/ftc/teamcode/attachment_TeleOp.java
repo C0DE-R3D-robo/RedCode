@@ -14,23 +14,26 @@ public class attachment_TeleOp extends OpMode {
     @Override
     public void loop() {
         //driving code
-        double r = Math.hypot(-gamepad1.left_stick_x, gamepad1.left_stick_y);
-        double robotAngle = Math.atan2(gamepad1.left_stick_y, -gamepad1.left_stick_x) - Math.PI / 4;
-        double rightX = -gamepad1.right_stick_x;
-        final double v1 = r * Math.cos(robotAngle) + rightX;
-        final double v2 = r * Math.sin(robotAngle) - rightX;
-        final double v3 = r * Math.sin(robotAngle) + rightX;
-        final double v4 = r * Math.cos(robotAngle) - rightX;
+        if (Math.abs(gamepad1.left_stick_x) > 0.1 || Math.abs(gamepad1.left_stick_y) > 0.1 || Math.abs(gamepad1.right_stick_x) > 0.1) {
+            double r = Math.hypot(-gamepad1.left_stick_x, gamepad1.left_stick_y);
 
-        robot.frontLeft.setPower(-1 * v1);
-        robot.frontRight.setPower(-1 * v2);
-        robot.backLeft.setPower(-1 * v3);
-        robot.backRight.setPower(-1 * v4);
+            double robotAngle = Math.atan2(gamepad1.left_stick_y, -gamepad1.left_stick_x) - Math.PI / 4;
+            double rightX = -gamepad1.right_stick_x;
+            final double v1 = r * Math.cos(robotAngle) + rightX;
+            final double v2 = r * Math.sin(robotAngle) - rightX;
+            final double v3 = r * Math.sin(robotAngle) + rightX;
+            final double v4 = r * Math.cos(robotAngle) - rightX;
 
-        telemetry.addData("fLPower", -1 * v1);
-        telemetry.addData("fRPower", -1 * v2);
-        telemetry.addData("bLPower", -1 * v3);
-        telemetry.addData("bRPower", -1 * v4);
+            robot.frontLeft.setPower(-1 * v1);
+            robot.frontRight.setPower(-1 * v2);
+            robot.backLeft.setPower(-1 * v3);
+            robot.backRight.setPower(-1 * v4);
+
+            telemetry.addData("fLPower", -1 * v1);
+            telemetry.addData("fRPower", -1 * v2);
+            telemetry.addData("bLPower", -1 * v3);
+            telemetry.addData("bRPower", -1 * v4);
+        }
 
         telemetry.addData("Encoder port 1 back left", robot.backLeft.getCurrentPosition());
         telemetry.addData("Encoder port 2 front right", robot.frontRight.getCurrentPosition());
@@ -41,20 +44,22 @@ public class attachment_TeleOp extends OpMode {
 
         if (gamepad1.right_bumper) {
             robot.grabberServo.setPosition(mecanumHardware.grabber_max);
-        } else {
+        }
+        if (gamepad1.left_bumper) {
+
             robot.grabberServo.setPosition(mecanumHardware.grabber_min);
         }
 
-        if (gamepad1.a) {
-            robot.carousel.setPower(1);
+        if (gamepad1.y) {
+            robot.carousel.setPower(-0.5);
         }
-        if (gamepad1.b) {
+        if (gamepad1.b) { 
             robot.carousel.setPower(0);
         }
-        if (gamepad1.left_trigger > 0.5) {
+        if (gamepad1.right_trigger > 0.5) {
             robot.extenderServo.setPower(1);
         }
-        if (gamepad1.right_trigger > 0.5) {
+        if (gamepad1.left_trigger > 0.5) {
             robot.extenderServo.setPower(0);
         }
         if (gamepad1.dpad_up) {
