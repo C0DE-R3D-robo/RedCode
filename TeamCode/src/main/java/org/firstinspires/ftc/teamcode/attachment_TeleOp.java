@@ -14,7 +14,7 @@ public class attachment_TeleOp extends OpMode {
     @Override
     public void loop() {
         //driving code
-        if (Math.abs(gamepad1.left_stick_x) > 0.1 || Math.abs(gamepad1.left_stick_y) > 0.1 || Math.abs(gamepad1.right_stick_x) > 0.1) {
+        //if (Math.abs(gamepad1.left_stick_x) > 0.1 || Math.abs(gamepad1.left_stick_y) > 0.1 || Math.abs(gamepad1.right_stick_x) > 0.1) {
             double r = Math.hypot(-gamepad1.left_stick_x, gamepad1.left_stick_y);
 
             double robotAngle = Math.atan2(gamepad1.left_stick_y, -gamepad1.left_stick_x) - Math.PI / 4;
@@ -33,7 +33,7 @@ public class attachment_TeleOp extends OpMode {
             telemetry.addData("fRPower", -1 * v2);
             telemetry.addData("bLPower", -1 * v3);
             telemetry.addData("bRPower", -1 * v4);
-        }
+
 
         telemetry.addData("Encoder port 1 back left", robot.backLeft.getCurrentPosition());
         telemetry.addData("Encoder port 2 front right", robot.frontRight.getCurrentPosition());
