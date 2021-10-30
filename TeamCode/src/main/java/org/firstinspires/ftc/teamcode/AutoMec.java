@@ -30,7 +30,6 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -62,7 +61,6 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  */
 
 @Autonomous(name="Mecanum Autonomous", group="Pushbot")
-@Disabled
 public class AutoMec extends LinearOpMode {
 
     /* Declare OpMode members. */
@@ -86,10 +84,11 @@ public class AutoMec extends LinearOpMode {
 
         //the below program assumes we start on blue team
         //drive horizontally towards wall
-        move(0.5,'y',5000);
+        move(0.5,'y',3000);
         //spin carousel for 8 seconds
         robot.carousel.setPower(0.5);
         sleep(8000);
+        robot.carousel.setPower(0);
 
         //drive forward
         move(1, 'f',3000);
@@ -102,6 +101,7 @@ public class AutoMec extends LinearOpMode {
         robot.frontRight.setPower(0);
         robot.backLeft.setPower(0);
         robot.backRight.setPower(0);
+        robot.carousel.setPower(0);
     }
 
     public void move(double power, char direction, long SLEEP) {
@@ -154,7 +154,8 @@ public class AutoMec extends LinearOpMode {
                 robot.backRight.setPower(-power);
                 sleep(SLEEP);
                 break;
-
+            default:
+                motorStop();
         }
     }
     public void diagonal(double power, char direction, long SLEEP){
