@@ -41,13 +41,18 @@ public class attachment_TeleOp extends OpMode {
         telemetry.addData("Encoder port 4 back left", robot.backLeft.getCurrentPosition());
 
         // attachment code
-
+        telemetry.addLine();
         if (gamepad1.right_bumper) {
             robot.grabberServo.setPosition(mecanumHardware.grabber_max);
+            telemetry.addData("Grabber Servo Position", mecanumHardware.grabber_max);
         }
-        if (gamepad1.left_bumper) {
+        else if (gamepad1.left_bumper) {
 
             robot.grabberServo.setPosition(mecanumHardware.grabber_min);
+            telemetry.addData("Grabber Servo Position", mecanumHardware.grabber_min);
+        }
+        else {
+            telemetry.addData("Grabber Servo Position", "None");
         }
 
         if (gamepad1.y) {
@@ -56,12 +61,20 @@ public class attachment_TeleOp extends OpMode {
         if (gamepad1.b) { 
             robot.carousel.setPower(0);
         }
-        if (gamepad1.right_trigger > 0.5) {
+        if (gamepad1.dpad_left) {
             robot.extenderServo.setPower(1);
+            telemetry.addData("Extender Power" , 1);
         }
-        if (gamepad1.left_trigger > 0.5) {
+        else if (gamepad1.dpad_right) {
+            robot.extenderServo.setPower(-1);
+            telemetry.addData("Extender Power" , -1);
+        }
+        else {
             robot.extenderServo.setPower(0);
+            telemetry.addData("Extender Power" , 0);
         }
+
+
         if (gamepad1.dpad_up) {
             robot.pulleyMotor.setPower(1);
         } else if (gamepad1.dpad_down) {
@@ -69,5 +82,6 @@ public class attachment_TeleOp extends OpMode {
         } else {
             robot.pulleyMotor.setPower(0);
         }
+        telemetry.update();
     }
 }

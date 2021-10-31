@@ -83,15 +83,16 @@ public class AutoMec extends LinearOpMode {
         //vuforia stuff here
 
         //the below program assumes we start on blue team
-        //drive horizontally towards wall
-        move(0.5,'y',3000);
+        //drive horizontally towards wall, OR move forward to the wall
+        //move(0.5,'y',2000);
+        move(0.5, 'f' , 1000);
         //spin carousel for 8 seconds
-        robot.carousel.setPower(0.5);
+        robot.carousel.setPower(-0.7);
         sleep(8000);
         robot.carousel.setPower(0);
-
-        //drive forward
-        move(1, 'f',3000);
+        //drive forward OR to backward
+        //move(1, 'f',1500);
+        move(1, 'b', 3500);
         //stop (dropping cargo TBD)
         motorStop();
     }
@@ -160,7 +161,7 @@ public class AutoMec extends LinearOpMode {
     }
     public void diagonal(double power, char direction, long SLEEP){
         switch(direction){
-            case 'r' :
+            case '1' :
                 //forward right
                 robot.frontLeft.setPower(power);
                 robot.frontRight.setPower(0);
@@ -168,7 +169,7 @@ public class AutoMec extends LinearOpMode {
                 robot.backRight.setPower(power);
                 sleep(SLEEP);
                 break;
-            case 'l' :
+            case '2' :
                 //forward left
                 robot.frontLeft.setPower(0);
                 robot.frontRight.setPower(power);
@@ -176,7 +177,7 @@ public class AutoMec extends LinearOpMode {
                 robot.backRight.setPower(0);
                 sleep(SLEEP);
                 break;
-            case '1' :
+            case '3' :
                 // go back to the right
                 robot.frontLeft.setPower(0);
                 robot.frontRight.setPower(-power);
@@ -184,7 +185,7 @@ public class AutoMec extends LinearOpMode {
                 robot.backRight.setPower(0);
                 sleep(SLEEP);
                 break;
-            case '2' :
+            case '4' :
                 robot.frontLeft.setPower(-power);
                 robot.frontRight.setPower(0);
                 robot.backLeft.setPower(0);
