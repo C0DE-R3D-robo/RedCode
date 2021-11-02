@@ -60,8 +60,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Mecanum Autonomous", group="Pushbot")
-public class AutoMec extends LinearOpMode {
+@Autonomous(name="red2disruption", group="Pushbot")
+public class red2disruption extends LinearOpMode {
 
     /* Declare OpMode members. */
     mecanumHardware robot = new mecanumHardware();   // Use a Pushbot's hardware
@@ -84,15 +84,28 @@ public class AutoMec extends LinearOpMode {
 
         //the below program assumes we start on blue team
         //drive horizontally towards wall, OR move forward to the wall
-        //move(0.5,'y',2000);
-        move(0.5, 'f' , 1000);
-        //spin carousel for 8 seconds
-        robot.carousel.setPower(-0.7);
+        /*ASSUMES OTHER ROBOT IS NOT DOING ANYTHING, SO YOU HAVE TO GO AROUND IT,
+        ROBOT IS FACING THE WALL, CLAW/WHEEL TO THE WALL
+        */
+
+        //go backwards to start going around
+        move(1, 'b',500);
+        //go to the left to the other edge of robot
+        move (1, 'y',2000);
+        //drive forward a bit to go to carousel
+        move(1, 'f', 750);
+        //spin carousel
+        robot.carousel.setPower(-0.8);
         sleep(8000);
         robot.carousel.setPower(0);
-        //drive forward OR to backward
-        //move(1, 'f',1500);
-        move(1, 'b', 3500);
+        //go backwards a bit
+        move(1, 'b',750);
+        //go to the right to other edge of robot
+        move (1, 'x',2000);
+        //go forward to the wall
+        move(1, 'f',500);
+        //go to the right to the warehouse
+        move(1, 'x',7750);
         //stop (dropping cargo TBD)
         motorStop();
     }
