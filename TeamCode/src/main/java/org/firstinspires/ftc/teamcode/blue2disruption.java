@@ -89,23 +89,23 @@ public class blue2disruption extends LinearOpMode {
         */
         //RIGHT FORWARD LEFT
         //go bright to start going around
-        move(1, 'x',500);
+        move(1, 'x',100);
         //go forward to the other edge of robot
-        move (1, 'f',2000);
+        move (1, 'f',250);
         //drive left a bit to go to carousel
-        move(1, 'y', 750);
+        move(1, 'y', 100);
         //spin carousel
         robot.carousel.setPower(-0.8);
         sleep(8000);
         robot.carousel.setPower(0);
         //go right a bit
-        move(1, 'x',750);
+        move(1, 'x',100);
         //go to the backwards to other edge of robot
-        move (1, 'b',2000);
+        move (1, 'b',250);
         //go left back to the wall
-        move(1, 'y',500);
+        move(1, 'y',100);
         //go to backwards to the warehouse
-        move(1, 'b',7750);
+        move(1, 'b',550);
         //stop (dropping cargo TBD)
         motorStop();
     }

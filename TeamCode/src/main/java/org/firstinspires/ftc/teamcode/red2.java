@@ -85,14 +85,14 @@ public class red2 extends LinearOpMode {
         //the below program assumes we start on blue team
         //RED 2 TO THE WALL AND ASSUMES WE DONT HAVE TO GO AROUND OTHER ROBOT, CLAW IS FACING WALL
         //move(0.5,'y',2000);
-        move(1, 'y' , 3500);
+        move(1, 'y' , 10000);
         //spin carousel for 8 seconds
         robot.carousel.setPower(-0.8);
         sleep(8000);
         robot.carousel.setPower(0);
         //drive TO THE SHIPPING HUB, WITH NO DISRUPTIONS FROM OTHER ROBOT
         //move(1, 'f',1500);
-        move(1, 'x', 7750);
+        move(1, 'x', 10000);
         //stop (dropping cargo TBD)
         motorStop();
     }

@@ -85,14 +85,14 @@ public class blue1 extends LinearOpMode {
         //the below program assumes we start on blue team
         //drive horizontally towards wall, OR move forward to the wall
         //ASSUMES BLUE TEAM CLOSE TO CAROUSEL, ITS FACING FORWARD TO CAROUSEL
-        move(0.5, 'f' , 1000);
+        move(0.5, 'f' , 5000);
         //spin carousel for 8 seconds
         robot.carousel.setPower(-0.8);
-        sleep(8000);
+        sleep(5000);
         robot.carousel.setPower(0);
         //drive forward OR to backward
         //move(1, 'f',1500);
-        move(1, 'b', 8250);
+        move(1, 'b', 2250);
         //stop (dropping cargo TBD)
         motorStop();
     }

@@ -89,23 +89,23 @@ public class red2disruption extends LinearOpMode {
         */
 
         //go backwards to start going around
-        move(1, 'b',500);
+        move(1, 'b',100);
         //go to the left to the other edge of robot
-        move (1, 'y',2000);
+        move (1, 'y',250);
         //drive forward a bit to go to carousel
-        move(1, 'f', 750);
+        move(1, 'f', 100);
         //spin carousel
         robot.carousel.setPower(-0.8);
         sleep(8000);
         robot.carousel.setPower(0);
         //go backwards a bit
-        move(1, 'b',750);
+        move(1, 'b',100);
         //go to the right to other edge of robot
-        move (1, 'x',2000);
+        move (1, 'x',250);
         //go forward to the wall
-        move(1, 'f',500);
+        move(1, 'f',100);
         //go to the right to the warehouse
-        move(1, 'x',7750);
+        move(1, 'x',550);
         //stop (dropping cargo TBD)
         motorStop();
     }

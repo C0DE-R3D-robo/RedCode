@@ -77,6 +77,12 @@ public class red1 extends LinearOpMode {
 
     @Override
     public void runOpMode() {
+        ElapsedTime e = new ElapsedTime();
+
+        e.reset();
+        e.milliseconds();
+
+
         robot.init(hardwareMap);
         waitForStart();
 
@@ -87,14 +93,16 @@ public class red1 extends LinearOpMode {
         /*ASSUMES ROBOT IS RED NEXT TO THE CAROUSEL, ROBOT IS FACING THE WALL, SO CLAW AND WHEEL IS
         NEXT TO THE WALL AND IT NEEDS TO GO LEFT TO CAROUSEL*/
         //MOVES LEFT TO CAROUSEL
-        move(1, 'y' , 1000);
+        move(1, 'y' , 7500);
         //spin carousel for 8 seconds
-        robot.carousel.setPower(-0.8);
-        sleep(8000);
+        e.reset();
+        while(e.milliseconds() < 8000) {
+            robot.carousel.setPower(-0.8);
+        }
         robot.carousel.setPower(0);
         //drives RIGHT TO WAREHOUSE
         //move(1, 'f',1500);
-        move(1, 'b', 7750);
+        move(1, 'b', 4500);
         //stop (dropping cargo TBD)
         motorStop();
     }
@@ -108,22 +116,25 @@ public class red1 extends LinearOpMode {
     }
 
     public void move(double power, char direction, long SLEEP) {
+        ElapsedTime t = new ElapsedTime();
         switch(direction){
             case 'f':
                 //setting power of motors to go forward
-                robot.frontLeft.setPower(power);
-                robot.frontRight.setPower(power);
-                robot.backLeft.setPower(power);
-                robot.backRight.setPower(power);
-                sleep(SLEEP);
+                while(t.milliseconds() < SLEEP) {
+                    robot.frontLeft.setPower(power);
+                    robot.frontRight.setPower(power);
+                    robot.backLeft.setPower(power);
+                    robot.backRight.setPower(power);
+                }
                 break;
             case 'b':
                 //setting power of motors to go backward
-                robot.frontLeft.setPower(-power);
-                robot.frontRight.setPower(-power);
-                robot.backLeft.setPower(-power);
-                robot.backRight.setPower(-power);
-                sleep(SLEEP);
+                while(t.milliseconds() < SLEEP) {
+                    robot.frontLeft.setPower(-power);
+                    robot.frontRight.setPower(-power);
+                    robot.backLeft.setPower(-power);
+                    robot.backRight.setPower(-power);
+                }
                 break;
             case 'r':
                 //to go right
@@ -143,19 +154,21 @@ public class red1 extends LinearOpMode {
                 break;
             case 'x':
                 //to strafe right
-                robot.frontLeft.setPower(power);
-                robot.frontRight.setPower(-power);
-                robot.backLeft.setPower(-power);
-                robot.backRight.setPower(power);
-                sleep(SLEEP);
+                while(t.milliseconds() < SLEEP) {
+                    robot.frontLeft.setPower(power);
+                    robot.frontRight.setPower(-power);
+                    robot.backLeft.setPower(-power);
+                    robot.backRight.setPower(power);
+                }
                 break;
             case 'y' :
                 // to strafe left
-                robot.frontLeft.setPower(-power);
-                robot.frontRight.setPower(power);
-                robot.backLeft.setPower(power);
-                robot.backRight.setPower(-power);
-                sleep(SLEEP);
+                while(t.milliseconds() < SLEEP) {
+                    robot.frontLeft.setPower(-power);
+                    robot.frontRight.setPower(power);
+                    robot.backLeft.setPower(power);
+                    robot.backRight.setPower(-power);
+                }
                 break;
             default:
                 motorStop();
