@@ -76,11 +76,15 @@ public class attachment_TeleOp extends OpMode {
 
 
         if (gamepad1.dpad_up) {
-            robot.pulleyMotor.setPower(1);
+            robot.pulleyMotor0.setPower(1);
+            robot.pulleyMotor1.setPower(1);
+
         } else if (gamepad1.dpad_down) {
-            robot.pulleyMotor.setPower(-1);
+            robot.pulleyMotor0.setPower(-1);
+            robot.pulleyMotor1.setPower(-1);
         } else {
-            robot.pulleyMotor.setPower(0);
+            robot.pulleyMotor0.setPower(0);
+            robot.pulleyMotor1.setPower(0);
         }
         telemetry.update();
     }
