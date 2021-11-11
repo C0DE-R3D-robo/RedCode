@@ -450,7 +450,7 @@ public class blue1 extends LinearOpMode {
             default:
                 motorStop();
 
+            }
+            }
         }
-        }
-    }
-}
+

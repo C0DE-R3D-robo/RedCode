@@ -61,6 +61,9 @@ public class attachment_TeleOp extends OpMode {
         if (gamepad1.b) { 
             robot.carousel.setPower(0);
         }
+        if (gamepad1.a) {
+            robot.carousel.setPower(0.5);
+        }
         if (gamepad1.dpad_left) {
             robot.extenderServo.setPower(1);
             telemetry.addData("Extender Power" , 1);
