@@ -95,17 +95,17 @@ public class red1 extends LinearOpMode {
         //MOVES LEFT TO CAROUSEL
         move(1, 'y' , 7500);
         //spin carousel for 8 seconds
-        e.reset();
-        while(e.milliseconds() < 8000) {
-            robot.carousel.setPower(-0.8);
+        //e.reset();
+        //while(e.milliseconds() < 8000) {
+         //   robot.carousel.setPower(-0.8);
         }
-        robot.carousel.setPower(0);
+        //robot.carousel.setPower(0);
         //drives RIGHT TO WAREHOUSE
         //move(1, 'f',1500);
-        move(1, 'b', 4500);
+        //move(1, 'b', 4500);
         //stop (dropping cargo TBD)
-        motorStop();
-    }
+        //motorStop();
+
 
     public void motorStop() {
         robot.frontLeft.setPower(0);

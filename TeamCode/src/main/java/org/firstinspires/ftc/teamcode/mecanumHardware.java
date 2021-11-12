@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -47,7 +46,6 @@ public class mecanumHardware
         pulleyMotor1.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
         pulleyMotor0.setDirection(DcMotor.Direction.REVERSE);// Set to REVERSE if using AndyMark motors
         carousel.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
-        extenderServo.setDirection(DcMotorSimple.Direction.FORWARD);
 
         // Set all motors to zero power
         frontLeft.setPower(0);

@@ -60,7 +60,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="blue2disruption", group="Pushbot")
+@Autonomous(name="Blue - Diversion Duck Retrieval", group="Blue Auton")
 public class blue2disruption extends LinearOpMode {
 
     /* Declare OpMode members. */

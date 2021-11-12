@@ -61,7 +61,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="blue1", group="Pushbot")
+@Autonomous(name="Blue - Direct Duck Retrieval", group="Blue Auton")
 public class blue1 extends LinearOpMode {
     public int x;
     public int y;
@@ -70,13 +70,13 @@ public class blue1 extends LinearOpMode {
     mecanumHardware robot = new mecanumHardware();   // Use a Pushbot's hardware
     private ElapsedTime runtime = new ElapsedTime();
 
-//    static final double     COUNTS_PER_MOTOR_REV    = 1440 ;    // eg: TETRIX Motor Encoder
-//    static final double     DRIVE_GEAR_REDUCTION    = 2.0 ;     // This is < 1.0 if geared UP
-//    static final double     WHEEL_DIAMETER_INCHES   = 4.0 ;     // For figuring circumference
-//    static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
-//                                                      (WHEEL_DIAMETER_INCHES * 3.1415);
-//    static final double     DRIVE_SPEED             = 0.6;
-//    static final double     TURN_SPEED              = 0.5;
+    static final double     COUNTS_PER_MOTOR_REV    = 560 ;    // eg: TETRIX Motor Encoder
+    static final double     DRIVE_GEAR_REDUCTION    = 16.0/10.0 ;     // This is < 1.0 if geared UP
+    static final double     WHEEL_DIAMETER_INCHES   = 3.0 ;     // For figuring circumference
+    static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
+                                                      (WHEEL_DIAMETER_INCHES * 3.1415);
+    static final double     DRIVE_SPEED             = 0.6;
+    static final double     TURN_SPEED              = 0.5;
 
     @Override
     public void runOpMode() {
@@ -91,14 +91,15 @@ public class blue1 extends LinearOpMode {
         //ASSUMES BLUE TEAM CLOSE TO CAROUSEL, ITS FACING FORWARD TO CAROUSEL
         //strafe left a bit
         reset();
-        move(1,'y',11);
+        //move(1,'y',11);
         reset();
-        move(1, 'f',39);
+        move(.4, 'f',24);
         reset();
+        move(.2, 'r', 4);
         //turn left
-        move(1,'l',2);
+        //move(1,'l',2);
         reset();
-        move(1,'f',4);
+        //move(1,'f',4);
         //spin carousel for 8 seconds
         robot.carousel.setPower(-0.8);
         sleep(5000);
@@ -117,6 +118,7 @@ public class blue1 extends LinearOpMode {
         robot.backLeft.setPower(0);
         robot.backRight.setPower(0);
         robot.carousel.setPower(0);
+        reset();
     }
     public void reset(){
         robot.frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -127,16 +129,16 @@ public class blue1 extends LinearOpMode {
     }
 
     public void move(double power, char direction, double distance) {
-        double ticks = 1120/7.5 * distance;
+        double ticks = COUNTS_PER_INCH * distance /3;
         switch(direction){
             case 'f':
                 //to go forward
 
                 //set target position
-                robot.frontLeft.setTargetPosition((int) ticks);
-                robot.backLeft.setTargetPosition((int) ticks);
-                robot.frontRight.setTargetPosition((int) ticks);
-                robot.backRight.setTargetPosition((int) ticks);
+                robot.frontLeft.setTargetPosition((int)ticks);
+                robot.backLeft.setTargetPosition((int)(ticks));
+                robot.frontRight.setTargetPosition((int)(ticks));
+                robot.backRight.setTargetPosition((int)(ticks));
                 //set run to position
                 robot.frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 robot.backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -144,12 +146,12 @@ public class blue1 extends LinearOpMode {
                 robot.backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
                 //set drive power for forward
-                robot.frontLeft.setPower(power);
+                robot.frontLeft.setPower(power*.3);
                 robot.frontRight.setPower(power);
-                robot.backLeft.setPower(power);
+                robot.backLeft.setPower(power*.3);
                 robot.backRight.setPower(power);
 
-                while (robot.frontLeft.isBusy() && robot.backLeft.isBusy() && robot.frontRight.isBusy() && robot.backLeft.isBusy())
+                while (robot.frontLeft.isBusy() && robot.backLeft.isBusy() && robot.frontRight.isBusy() && robot.backRight.isBusy())
                 {
 
                 }
@@ -182,7 +184,7 @@ public class blue1 extends LinearOpMode {
                 robot.backLeft.setPower(-power);
                 robot.backRight.setPower(-power);
 
-                while (robot.frontLeft.isBusy() && robot.backLeft.isBusy() && robot.frontRight.isBusy() && robot.backLeft.isBusy())
+                while (robot.frontLeft.isBusy() && robot.backLeft.isBusy() && robot.frontRight.isBusy() && robot.backRight.isBusy())
                 {
 
                 }
@@ -197,10 +199,10 @@ public class blue1 extends LinearOpMode {
             case 'r':
                 //to go right
 
-            robot.frontLeft.setTargetPosition(3000);
-            robot.backLeft.setTargetPosition(-3000);
-            robot.frontRight.setTargetPosition(3000);
-            robot.backRight.setTargetPosition(-3000);
+            robot.frontLeft.setTargetPosition((int)ticks);
+            robot.backLeft.setTargetPosition((int)ticks);
+            robot.frontRight.setTargetPosition((int)-ticks);
+            robot.backRight.setTargetPosition((int)-ticks);
             //set run to position
             robot.frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             robot.backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -209,11 +211,11 @@ public class blue1 extends LinearOpMode {
 
             //set drive power for forward
             robot.frontLeft.setPower(power);
-            robot.frontRight.setPower(-power);
-            robot.backLeft.setPower(power);
+            robot.frontRight.setPower(power);
+            robot.backLeft.setPower(-power);
             robot.backRight.setPower(-power);
 
-            while (robot.frontLeft.isBusy() && robot.backLeft.isBusy() && robot.frontRight.isBusy() && robot.backLeft.isBusy())
+            while (robot.frontLeft.isBusy() && robot.backLeft.isBusy() && robot.frontRight.isBusy() && robot.backRight.isBusy())
             {
 
             }
@@ -243,7 +245,7 @@ public class blue1 extends LinearOpMode {
             robot.backLeft.setPower(-power);
             robot.backRight.setPower(power);
 
-            while (robot.frontLeft.isBusy() && robot.backLeft.isBusy() && robot.frontRight.isBusy() && robot.backLeft.isBusy())
+            while (robot.frontLeft.isBusy() && robot.backLeft.isBusy() && robot.frontRight.isBusy() && robot.backRight.isBusy())
             {
 
             }
@@ -275,7 +277,7 @@ public class blue1 extends LinearOpMode {
             robot.backLeft.setPower(-power);
             robot.backRight.setPower(power);
 
-            while (robot.frontLeft.isBusy() && robot.backLeft.isBusy() && robot.frontRight.isBusy() && robot.backLeft.isBusy())
+            while (robot.frontLeft.isBusy() && robot.backLeft.isBusy() && robot.frontRight.isBusy() && robot.backRight.isBusy())
             {
 
             }
@@ -306,7 +308,7 @@ public class blue1 extends LinearOpMode {
             robot.backLeft.setPower(power);
             robot.backRight.setPower(-power);
 
-            while (robot.frontLeft.isBusy() && robot.backLeft.isBusy() && robot.frontRight.isBusy() && robot.backLeft.isBusy())
+            while (robot.frontLeft.isBusy() && robot.backLeft.isBusy() && robot.frontRight.isBusy() && robot.backRight.isBusy())
             {
 
             }
@@ -345,7 +347,7 @@ public class blue1 extends LinearOpMode {
                 robot.backLeft.setPower(0);
                 robot.backRight.setPower(power);
 
-                while (robot.frontLeft.isBusy() && robot.backLeft.isBusy() && robot.frontRight.isBusy() && robot.backLeft.isBusy()) {
+                while (robot.frontLeft.isBusy() && robot.backLeft.isBusy() && robot.frontRight.isBusy() && robot.backRight.isBusy()) {
 
                 }
                 motorStop();
@@ -376,7 +378,7 @@ public class blue1 extends LinearOpMode {
                 robot.backLeft.setPower(power);
                 robot.backRight.setPower(0);
 
-                while (robot.frontLeft.isBusy() && robot.backLeft.isBusy() && robot.frontRight.isBusy() && robot.backLeft.isBusy()) {
+                while (robot.frontLeft.isBusy() && robot.backLeft.isBusy() && robot.frontRight.isBusy() && robot.backRight.isBusy()) {
 
                 }
                 motorStop();
@@ -406,7 +408,7 @@ public class blue1 extends LinearOpMode {
                 robot.backLeft.setPower(-power);
                 robot.backRight.setPower(0);
 
-                while (robot.frontLeft.isBusy() && robot.backLeft.isBusy() && robot.frontRight.isBusy() && robot.backLeft.isBusy()) {
+                while (robot.frontLeft.isBusy() && robot.backLeft.isBusy() && robot.frontRight.isBusy() && robot.backRight.isBusy()) {
 
                 }
                 motorStop();
@@ -436,7 +438,7 @@ public class blue1 extends LinearOpMode {
                 robot.backLeft.setPower(0);
                 robot.backRight.setPower(-power);
 
-                while (robot.frontLeft.isBusy() && robot.backLeft.isBusy() && robot.frontRight.isBusy() && robot.backLeft.isBusy()) {
+                while (robot.frontLeft.isBusy() && robot.backLeft.isBusy() && robot.frontRight.isBusy() && robot.backRight.isBusy()) {
 
                 }
                 motorStop();
