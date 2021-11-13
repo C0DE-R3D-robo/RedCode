@@ -61,8 +61,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Blue - Far Duck Retrieval", group="Blue Auton")
-public class bluefar extends LinearOpMode {
+@Autonomous(name="Red - Far Duck Retrieval", group="Red Auton")
+public class redfar extends LinearOpMode {
     public int x;
     public int y;
 
@@ -94,15 +94,13 @@ public class bluefar extends LinearOpMode {
 
         //move(1,'y',11);
         reset();
-        //move(1,'f',10);
-        //turn left
-        //GO BACKWARDS TO WAREHOUSE, FACING TEAM CAROUSEL
+
+        //GO BACKWARDS TO WAREHOUSE. FACING TEAM CAROUSEL
         move(1,'b',36);
         reset();
 
         reset();
-        //move(1, 'f',1500);
-        //move(1,'b',50);
+
 
         motorStop();
     }

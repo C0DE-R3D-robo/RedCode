@@ -61,8 +61,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Blue - Direct Duck Retrieval", group="Blue Auton")
-public class blue1 extends LinearOpMode {
+@Autonomous(name="Red - Direct Duck Retrieval", group="Red Auton")
+public class redclose extends LinearOpMode {
     public int x;
     public int y;
 
@@ -96,26 +96,22 @@ public class blue1 extends LinearOpMode {
         reset();
         //move(1,'f',10);
         //turn left
-        //move(1,'l',2);
+        //move(1,'l',2);\
+        //strafe left, FACING OPPOSITE OF TEAM WALL, TO THE OTHER TEAM
         move(1,'y',25.5);
         reset();
-        //move(1,'f',4);
-        //spin carousel for 8 seconds
+        //carousel
         robot.carousel.setPower(0.8);
-        sleep(2000);
+        sleep(2500);
         robot.carousel.setPower(0);
-        //drive forward OR to backward
+
         reset();
-        //move(1, 'f',1500);
-        move(1,'b',50);
+        //forwards to team shipping place
+        move(1,'f',50);
         reset();
         //move(1,'y',15);
         reset();
-//        move(1,'l',4);
-//        reset();
-//        move(1,'f',10);
-        //move(1, 'b',39);
-        //stop (dropping cargo TBD)
+//
         motorStop();
     }
 
