@@ -16,7 +16,7 @@ public class mecanumHardware
     public Servo grabberServo = null;
 
     public static final double grabber_min = 0;
-    public static final double grabber_max = 1;
+    public static final double grabber_max = 0.75;
 
     /* Constructor */
     public mecanumHardware(){
@@ -42,7 +42,7 @@ public class mecanumHardware
         frontLeft.setDirection(DcMotor.Direction.REVERSE); // Set to REVERSE if using AndyMark motors
         frontRight.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
         backLeft.setDirection(DcMotor.Direction.REVERSE); // Set to REVERSE if using AndyMark motors
-        backRight.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
+        backRight.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
         pulleyMotor1.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
         pulleyMotor0.setDirection(DcMotor.Direction.REVERSE);// Set to REVERSE if using AndyMark motors
         carousel.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors

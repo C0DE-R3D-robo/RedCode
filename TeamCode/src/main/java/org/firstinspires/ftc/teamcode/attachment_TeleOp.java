@@ -26,6 +26,8 @@ public class attachment_TeleOp extends OpMode {
         double v3 = r * Math.sin(robotAngle) + rightX;
         double v4 = r * Math.cos(robotAngle) - rightX;
 
+
+
         //we assign the power to the actual motors further down in the code, so that we are able to reduce the power using the left trigger.
 
 
@@ -84,7 +86,7 @@ public class attachment_TeleOp extends OpMode {
         }
 
         double newV1 = v1;
-        double newV2 = v3;
+        double newV2 = v2;
         double newV3 = v3;
         double newV4 = v4;
 

@@ -70,8 +70,8 @@ public class blue1 extends LinearOpMode {
     mecanumHardware robot = new mecanumHardware();   // Use a Pushbot's hardware
     private ElapsedTime runtime = new ElapsedTime();
 
-    static final double     COUNTS_PER_MOTOR_REV    = 560 ;    // eg: TETRIX Motor Encoder
-    static final double     DRIVE_GEAR_REDUCTION    = 16.0/10.0 ;     // This is < 1.0 if geared UP
+    static final double     COUNTS_PER_MOTOR_REV    = 1120 ;    // eg: TETRIX Motor Encoder
+    static final double     DRIVE_GEAR_REDUCTION    = 2 ;     // This is < 1.0 if geared UP
     static final double     WHEEL_DIAMETER_INCHES   = 3.0 ;     // For figuring circumference
     static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
                                                       (WHEEL_DIAMETER_INCHES * 3.1415);
@@ -90,23 +90,28 @@ public class blue1 extends LinearOpMode {
         //distance is how many inches you wanna go
         //ASSUMES BLUE TEAM CLOSE TO CAROUSEL, ITS FACING FORWARD TO CAROUSEL
         //strafe left a bit
-        reset();
+
+
         //move(1,'y',11);
         reset();
-        move(.4, 'f',24);
-        reset();
-        move(.2, 'r', 4);
+        //move(1,'f',10);
         //turn left
         //move(1,'l',2);
+        move(1,'y',29.5);
         reset();
         //move(1,'f',4);
         //spin carousel for 8 seconds
-        robot.carousel.setPower(-0.8);
-        sleep(5000);
+        robot.carousel.setPower(0.8);
+        sleep(2000);
         robot.carousel.setPower(0);
         //drive forward OR to backward
         //move(1, 'f',1500);
         reset();
+        move(1,'b',15);
+        reset();
+//        move(1,'l',4);
+//        reset();
+//        move(1,'f',10);
         //move(1, 'b',39);
         //stop (dropping cargo TBD)
         motorStop();
@@ -129,7 +134,8 @@ public class blue1 extends LinearOpMode {
     }
 
     public void move(double power, char direction, double distance) {
-        double ticks = COUNTS_PER_INCH * distance /3;
+        double ticks = COUNTS_PER_INCH * distance/3;
+//        double ticks = 7.5* distance;
         switch(direction){
             case 'f':
                 //to go forward
@@ -146,9 +152,9 @@ public class blue1 extends LinearOpMode {
                 robot.backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
                 //set drive power for forward
-                robot.frontLeft.setPower(power*.3);
+                robot.frontLeft.setPower(power);
                 robot.frontRight.setPower(power);
-                robot.backLeft.setPower(power*.3);
+                robot.backLeft.setPower(power);
                 robot.backRight.setPower(power);
 
                 while (robot.frontLeft.isBusy() && robot.backLeft.isBusy() && robot.frontRight.isBusy() && robot.backRight.isBusy())
@@ -182,7 +188,7 @@ public class blue1 extends LinearOpMode {
                 robot.frontLeft.setPower(-power);
                 robot.frontRight.setPower(-power);
                 robot.backLeft.setPower(-power);
-                robot.backRight.setPower(-power);
+                robot.backRight.setPower(power);
 
                 while (robot.frontLeft.isBusy() && robot.backLeft.isBusy() && robot.frontRight.isBusy() && robot.backRight.isBusy())
                 {
