@@ -62,7 +62,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 @Autonomous(name="blue2", group="Pushbot")
 public class blue2 extends LinearOpMode {
-//kjkjhkjh
+//ygjiug
     /* Declare OpMode members. */
     mecanumHardware robot = new mecanumHardware();   // Use a Pushbot's hardware
     private ElapsedTime runtime = new ElapsedTime();
